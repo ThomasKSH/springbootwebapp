@@ -34,6 +34,17 @@ deploy-apps:
         insecure-skip-tls-verify: true
         command: -n thkoke-apps rollout restart deployment/thkoke-apps
 
+scaleout-apps:
+    steps:
+    - bash-template
+    # Rollout Application
+    - kubectl:
+        name: scale out pod
+        server: $OKE_MASTER
+        token: $OKE_TOKEN
+        insecure-skip-tls-verify: true
+        command: -n thkoke-apps scale --replicas=3 deployment/thkoke-apps
+
 status-apps:
     steps:
     - bash-template
